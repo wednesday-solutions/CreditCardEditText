@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CreditCard edit text example</string>
+    <string name="enter_card_number">Enter card number</string>
+</resources>
