@@ -1,4 +1,22 @@
 apply plugin: 'android-library'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+version = "1.0.0"
+
+ext.isReleaseVersion = has("release")
+
+if (isReleaseVersion) {
+    ext.sonatypeRepo = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+} else {
+    version += "-SNAPSHOT"
+    ext.sonatypeRepo = "https://oss.sonatype.org/content/repositories/snapshots/"
+}
+
+group = "com.ali"
+
+ext.sonatypeUsername = has("sonatypeUsername") ? sonatypeUsername : ""
+ext.sonatypePassword = has("sonatypePassword") ? sonatypePassword : ""
 
 android {
     compileSdkVersion 18
@@ -13,6 +31,69 @@ android {
     release {
         runProguard false
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+    }
+}
+
+configurations {
+    archives {
+        extendsFrom configurations.default
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+signing {
+    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+task publishLocal(type: Upload) {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+        repository(url: "file://$buildDir/repo")
+    }
+}
+
+uploadArchives {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+        repository(url: project.ext.sonatypeRepo) {
+            authentication(userName: project.ext.sonatypeUsername,
+                    password: project.ext.sonatypePassword)
+        }
+
+        pom.project {
+            name 'CreditCardEditText library'
+            packaging 'aar'
+            description 'Android EditText extension that matches a credit card number to its type.'
+            url 'https://github.com/aliHafizji/CreditCardEditText.git'
+
+            scm {
+                url 'scm:git@github.com:aliHafizji/CreditCardEditText.git'
+                connection 'scm:git@github.com:aliHafizji/CreditCardEditText.git'
+                developerConnection 'scm:git@github.com:aliHafizji/CreditCardEditText.git'
+            }
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id 'olieh'
+                    name 'Ali Hafizji'
+                    email 'ali.hafizji@gmail.com'
+                }
+            }
+        }
     }
 }
 

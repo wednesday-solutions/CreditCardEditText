@@ -1,4 +1,4 @@
-package com.ali;
+package com.alihafizji;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;

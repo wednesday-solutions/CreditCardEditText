@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name="com.ali.MainActivity"
+            android:name="com.alihafizji.MainActivity"
             android:theme="@style/Theme.AppCompat"
             android:label="@string/app_name" >
             <intent-filter>
