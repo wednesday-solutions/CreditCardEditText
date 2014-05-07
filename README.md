@@ -5,7 +5,13 @@ CreditCardEditText
 
 Android EditText extension that matches a credit card number to its type. It also provides a highly customizable interface to add more patterns.
 
-//Images
+![Default CreditCardEditText](https://raw.githubusercontent.com/aliHafizji/CreditCardEditText/master/example/default_creditcard_image.png)
+
+![Visa](https://raw.githubusercontent.com/aliHafizji/CreditCardEditText/master/example/visa_credit_card_image.png)
+
+![Mastercard](https://raw.githubusercontent.com/aliHafizji/CreditCardEditText/master/example/master_card_image.png)
+
+![American express](https://raw.githubusercontent.com/aliHafizji/CreditCardEditText/master/example/american_express_image.png)
 
 ## Setup
 
