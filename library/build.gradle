@@ -13,7 +13,7 @@ if (isReleaseVersion) {
     ext.sonatypeRepo = "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
-group = "com.ali"
+group = "com.alihafizji.creditcardedittext"
 
 ext.sonatypeUsername = has("sonatypeUsername") ? sonatypeUsername : ""
 ext.sonatypePassword = has("sonatypePassword") ? sonatypePassword : ""
@@ -88,7 +88,7 @@ uploadArchives {
 
             developers {
                 developer {
-                    id 'olieh'
+                    id 'ali.hafizji'
                     name 'Ali Hafizji'
                     email 'ali.hafizji@gmail.com'
                 }
