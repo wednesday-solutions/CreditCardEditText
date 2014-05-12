@@ -2,7 +2,7 @@ apply plugin: 'android-library'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = "1.0.0"
+version = "1.0.1"
 
 ext.isReleaseVersion = has("release")
 
@@ -95,9 +95,4 @@ uploadArchives {
             }
         }
     }
-}
-
-dependencies {
-    compile 'com.android.support:appcompat-v7:+'
-    compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
