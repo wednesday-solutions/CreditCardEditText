@@ -82,6 +82,7 @@ Once this class is ready all you need to do is to pass this object to the `Credi
 ## Developed by
 
 * Ali Hafizji <ali.hafizji@gmail.com>
+
 [Follow me on twitter](https://twitter.com/Ali_hafizji).
 
 ## Credits
