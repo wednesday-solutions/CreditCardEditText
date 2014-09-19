@@ -85,6 +85,8 @@ Once this class is ready all you need to do is to pass this object to the `Credi
 
 [Follow me on twitter](https://twitter.com/Ali_hafizji).
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CreditCardEditText-orange.svg?style=flat)](https://android-arsenal.com/details/1/474)
+
 ## Credits
 
 "credit_card" image by Brian Opplander, from the [noun project](nounproject.com) collection.
