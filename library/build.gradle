@@ -1,10 +1,10 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
 version = "1.0.1"
 
-ext.isReleaseVersion = has("release")
+ext.isReleaseVersion = ext.has("release")
 
 if (isReleaseVersion) {
     ext.sonatypeRepo = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
@@ -15,23 +15,26 @@ if (isReleaseVersion) {
 
 group = "com.alihafizji.creditcardedittext"
 
-ext.sonatypeUsername = has("sonatypeUsername") ? sonatypeUsername : ""
-ext.sonatypePassword = has("sonatypePassword") ? sonatypePassword : ""
+ext.sonatypeUsername = ext.has("sonatypeUsername") ? sonatypeUsername : ""
+ext.sonatypePassword = ext.has("sonatypePassword") ? sonatypePassword : ""
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion "19.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
-        minSdkVersion 7
-        targetSdkVersion 16
+        minSdkVersion 14
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
-    release {
-        runProguard false
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
     }
+
 }
 
 configurations {

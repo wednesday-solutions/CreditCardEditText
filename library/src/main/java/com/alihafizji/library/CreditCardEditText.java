@@ -40,7 +40,7 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
     private String mPreviousText;
 
     public interface CreditCartEditTextInterface {
-        public List<CreditCard> mapOfRegexStringAndImageResourceForCreditCardEditText(CreditCardEditText creditCardEditText);
+        List<CreditCard> mapOfRegexStringAndImageResourceForCreditCardEditText(CreditCardEditText creditCardEditText);
     }
 
     public CreditCardEditText(Context context) {
@@ -66,6 +66,7 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
         if (noMatchFoundDrawable != null) {
             mNoMatchFoundDrawable = noMatchFoundDrawable;
             mNoMatchFoundDrawable.setBounds(0, 0, mNoMatchFoundDrawable.getIntrinsicWidth(), mNoMatchFoundDrawable.getIntrinsicHeight());
+            showRightDrawable(null);
         }
     }
 
@@ -111,9 +112,11 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
     public void onTextChanged(EditText view, String text) {
         matchRegexPatternsWithText(text.replace(SEPARATOR, ""));
 
-        String difference = StringUtil.difference(text, mPreviousText);
-        if (!difference.equals(SEPARATOR)) {
-            addSeparatorToText();
+        if (mPreviousText != null && text.length() > mPreviousText.length()) {
+            String difference = StringUtil.difference(text, mPreviousText);
+            if (!difference.equals(SEPARATOR)) {
+                addSeparatorToText();
+            }
         }
         mPreviousText = text;
     }
