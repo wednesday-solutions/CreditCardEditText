@@ -111,9 +111,11 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
     public void onTextChanged(EditText view, String text) {
         matchRegexPatternsWithText(text.replace(SEPARATOR, ""));
 
-        String difference = StringUtil.difference(text, mPreviousText);
-        if (!difference.equals(SEPARATOR)) {
-            addSeparatorToText();
+        if (mPreviousText != null && text.length() > mPreviousText.length()) {
+            String difference = StringUtil.difference(text, mPreviousText);
+            if (!difference.equals(SEPARATOR)) {
+                addSeparatorToText();
+            }
         }
         mPreviousText = text;
     }
