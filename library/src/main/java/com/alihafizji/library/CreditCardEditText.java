@@ -1,6 +1,7 @@
 package com.alihafizji.library;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -36,6 +37,7 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
     private CreditCartEditTextInterface mCreditCardEditTextInterface;
     private CreditCardTextWatcher mTextWatcher;
 
+    private String mSeparator;
     private int mMinimumCreditCardLength, mMaximumCreditCardLength;
     private String mPreviousText;
 
@@ -46,16 +48,19 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
     public CreditCardEditText(Context context) {
         super(context);
         init();
+        mSeparator = SEPARATOR;
     }
 
     public CreditCardEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
+        initPropertiesFromAttributes(context, attrs);
     }
 
     public CreditCardEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
+        initPropertiesFromAttributes(context, attrs);
     }
 
     public Drawable getNoMatchFoundDrawable() {
@@ -101,7 +106,7 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
     }
 
     public String getCreditCardNumber() {
-        String creditCardNumber = getText().toString().replace(SEPARATOR, "");
+        String creditCardNumber = getText().toString().replace(mSeparator, "");
         if (creditCardNumber.length() >= mMinimumCreditCardLength && creditCardNumber.length() <= mMaximumCreditCardLength) {
             return creditCardNumber;
         }
@@ -110,11 +115,11 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
 
     @Override
     public void onTextChanged(EditText view, String text) {
-        matchRegexPatternsWithText(text.replace(SEPARATOR, ""));
+        matchRegexPatternsWithText(text.replace(mSeparator, ""));
 
         if (mPreviousText != null && text.length() > mPreviousText.length()) {
             String difference = StringUtil.difference(text, mPreviousText);
-            if (!difference.equals(SEPARATOR)) {
+            if (!difference.equals(mSeparator)) {
                 addSeparatorToText();
             }
         }
@@ -148,6 +153,16 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
         }
     }
 
+    private void initPropertiesFromAttributes(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CreditCardEditText);
+        if (typedArray != null) {
+            mSeparator = typedArray.getString(R.styleable.CreditCardEditText_separator);
+            if (mSeparator == null) {
+                mSeparator = SEPARATOR;
+            }
+            typedArray.recycle();
+        }
+    }
     private void init() {
         mMinimumCreditCardLength = MINIMUM_CREDIT_CARD_LENGTH;
         mMaximumCreditCardLength = MAXIMUM_CREDIT_CARD_LENGTH;
@@ -167,12 +182,12 @@ public class CreditCardEditText extends EditText implements CreditCardTextWatche
 
     private void addSeparatorToText() {
         String text = getText().toString();
-        text = text.replace(SEPARATOR, "");
+        text = text.replace(mSeparator, "");
         if (text.length() >= 16) {
             return;
         }
         int interval = 4;
-        char separator = SEPARATOR.charAt(0);
+        char separator = mSeparator.charAt(0);
 
         StringBuilder stringBuilder = new StringBuilder(text);
         for (int i = 0; i < text.length() / interval; i++) {

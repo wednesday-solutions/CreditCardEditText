@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textNoSuggestions"
+        custom:separator="-"
         android:hint="@string/enter_card_number" />
 
 </RelativeLayout>

@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = "2.0"
+version = "3.0"
 
 ext.isReleaseVersion = project.hasProperty("release")
 
@@ -19,12 +19,12 @@ ext.sonatypeUsername = ext.has("sonatypeUsername") ? sonatypeUsername : ""
 ext.sonatypePassword = ext.has("sonatypePassword") ? sonatypePassword : ""
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 28
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
