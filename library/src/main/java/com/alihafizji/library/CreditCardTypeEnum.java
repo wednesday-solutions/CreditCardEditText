@@ -6,7 +6,9 @@ package com.alihafizji.library;
 public enum CreditCardTypeEnum {
     VISA("Visa"),
     MASTER_CARD("MasterCard"),
-    AMERICAN_EXPRESS("American Express");
+    AMERICAN_EXPRESS("American Express"),
+    DINERS_CLUB("Diners"),
+    RUPAY_CARD("Rupay");
 
     public final String cartType;
 
