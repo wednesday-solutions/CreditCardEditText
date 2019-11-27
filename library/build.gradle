@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = "3.0"
+version = "4.0"
 
 ext.isReleaseVersion = project.hasProperty("release")
 
@@ -13,7 +13,7 @@ if (isReleaseVersion) {
     ext.sonatypeRepo = "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
-group = "com.alihafizji.creditcardedittext"
+group = "com.wednesday.creditcardedittext"
 
 ext.sonatypeUsername = ext.has("sonatypeUsername") ? sonatypeUsername : ""
 ext.sonatypePassword = ext.has("sonatypePassword") ? sonatypePassword : ""
@@ -73,12 +73,12 @@ uploadArchives {
             name 'CreditCardEditText library'
             packaging 'aar'
             description 'Android EditText extension that matches a credit card number to its type.'
-            url 'https://github.com/aliHafizji/CreditCardEditText.git'
+            url 'https://github.com/wednesday-solutions/CreditCardEditText.git'
 
             scm {
-                url 'scm:git@github.com:aliHafizji/CreditCardEditText.git'
-                connection 'scm:git@github.com:aliHafizji/CreditCardEditText.git'
-                developerConnection 'scm:git@github.com:aliHafizji/CreditCardEditText.git'
+                url 'scm:git@github.com:wednesday-solutions/CreditCardEditText.git'
+                connection 'scm:git@github.com:wednesday-solutions/CreditCardEditText.git'
+                developerConnection 'scm:git@github.com:wednesday-solutions/CreditCardEditText.git'
             }
 
             licenses {
@@ -93,7 +93,7 @@ uploadArchives {
                 developer {
                     id 'ali.hafizji'
                     name 'Ali Hafizji'
-                    email 'ali.hafizji@gmail.com'
+                    email 'ali@wednesday.is'
                 }
             }
         }
