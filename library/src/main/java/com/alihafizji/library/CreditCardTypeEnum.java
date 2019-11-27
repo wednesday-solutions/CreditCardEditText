@@ -6,7 +6,9 @@ package com.alihafizji.library;
 public enum CreditCardTypeEnum {
     VISA("Visa"),
     MASTER_CARD("MasterCard"),
-    AMERICAN_EXPRESS("American Express");
+    AMERICAN_EXPRESS("American Express"),
+    DINERS("Diners"),
+    RUPAY("Rupay");
 
     public final String cartType;
 
@@ -15,7 +17,7 @@ public enum CreditCardTypeEnum {
     }
 
     public static String[] creditCardTypes() {
-        String types[] = new String[values().length];
+        String[] types = new String[values().length];
         int i = 0;
         for(CreditCardTypeEnum type : values()) {
             types[i] = type.cartType;
