@@ -1,4 +1,4 @@
-package com.alihafizji.library;
+package com.wednesday.library;
 
 /**
  * Created by kauserali on 05/05/14.

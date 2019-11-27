@@ -1,4 +1,4 @@
-package com.alihafizji.library;
+package com.wednesday.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.widget.EditText;
+
+import com.wednesday.library.R;
 
 import java.util.List;
 

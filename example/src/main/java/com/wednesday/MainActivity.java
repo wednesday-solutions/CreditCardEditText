@@ -1,4 +1,4 @@
-package com.alihafizji;
+package com.wednesday;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.alihafizji.library.CreditCardEditText;
 
 public class MainActivity extends AppCompatActivity {
 

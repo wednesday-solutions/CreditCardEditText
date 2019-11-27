@@ -1,6 +1,8 @@
-package com.alihafizji.library;
+package com.wednesday.library;
 
 import android.content.Context;
+
+import com.wednesday.library.R;
 
 import java.util.ArrayList;
 import java.util.List;
