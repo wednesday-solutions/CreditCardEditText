@@ -1,4 +1,4 @@
-package com.wednesday.library;
+package com.wednesday.creditcardedittext;
 
 import android.text.Editable;
 import android.text.TextWatcher;

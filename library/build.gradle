@@ -2,22 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-version = "4.0"
-
-ext.isReleaseVersion = project.hasProperty("release")
-
-if (isReleaseVersion) {
-    ext.sonatypeRepo = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-} else {
-    version += "-SNAPSHOT"
-    ext.sonatypeRepo = "https://oss.sonatype.org/content/repositories/snapshots/"
-}
-
-group = "com.wednesday.creditcardedittext"
-
-ext.sonatypeUsername = ext.has("sonatypeUsername") ? sonatypeUsername : ""
-ext.sonatypePassword = ext.has("sonatypePassword") ? sonatypePassword : ""
-
 android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
@@ -37,65 +21,88 @@ android {
 
 }
 
-configurations {
-    archives {
-        extendsFrom configurations.default
-    }
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
 }
 
-repositories {
-    mavenCentral()
+def getReleaseRepositoryUrl() {
+    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL
+            : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
 }
 
-signing {
-    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
+def getSnapshotRepositoryUrl() {
+    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL
+            : "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
-task publishLocal(type: Upload) {
-    configuration = configurations.archives
-    repositories.mavenDeployer {
-        repository(url: "file://$buildDir/repo")
-    }
+def getRepositoryUsername() {
+    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
 }
 
-uploadArchives {
-    configuration = configurations.archives
-    repositories.mavenDeployer {
-        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+def getRepositoryPassword() {
+    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+}
 
-        repository(url: project.ext.sonatypeRepo) {
-            authentication(userName: project.ext.sonatypeUsername,
-                    password: project.ext.sonatypePassword)
-        }
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-        pom.project {
-            name 'CreditCardEditText library'
-            packaging 'aar'
-            description 'Android EditText extension that matches a credit card number to its type.'
-            url 'https://github.com/wednesday-solutions/CreditCardEditText.git'
+                pom.groupId = GROUP
+                pom.artifactId = POM_ARTIFACT_ID
+                pom.version = VERSION_NAME
 
-            scm {
-                url 'scm:git@github.com:wednesday-solutions/CreditCardEditText.git'
-                connection 'scm:git@github.com:wednesday-solutions/CreditCardEditText.git'
-                developerConnection 'scm:git@github.com:wednesday-solutions/CreditCardEditText.git'
-            }
+                repository(url: getReleaseRepositoryUrl()) {
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+                }
+                snapshotRepository(url: getSnapshotRepositoryUrl()) {
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+                }
 
-            licenses {
-                license {
-                    name 'The Apache Software License, Version 2.0'
-                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    distribution 'repo'
+                pom.project {
+                    name POM_NAME
+                    packaging POM_PACKAGING
+                    description POM_DESCRIPTION
+                    url POM_URL
+
+                    scm {
+                        url POM_SCM_URL
+                        connection POM_SCM_CONNECTION
+                        developerConnection POM_SCM_DEV_CONNECTION
+                    }
+
+                    licenses {
+                        license {
+                            name POM_LICENCE_NAME
+                            url POM_LICENCE_URL
+                            distribution POM_LICENCE_DIST
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id POM_DEVELOPER_ID
+                            name POM_DEVELOPER_NAME
+                        }
+                    }
                 }
             }
-
-            developers {
-                developer {
-                    id 'ali.hafizji'
-                    name 'Ali Hafizji'
-                    email 'ali@wednesday.is'
-                }
-            }
         }
+    }
+
+    signing {
+        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
+
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.sourceFiles
+    }
+
+    artifacts {
+        archives androidSourcesJar
     }
 }

@@ -1,4 +1,4 @@
-package com.wednesday.library;
+package com.wednesday.creditcardedittext;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.text.InputType;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-import com.wednesday.library.R;
+import com.wednesday.creditcardedittext.R;
 
 import java.util.List;
 

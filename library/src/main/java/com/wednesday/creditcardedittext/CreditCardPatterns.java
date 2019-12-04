@@ -1,8 +1,8 @@
-package com.wednesday.library;
+package com.wednesday.creditcardedittext;
 
 import android.content.Context;
 
-import com.wednesday.library.R;
+import com.wednesday.creditcardedittext.R;
 
 import java.util.ArrayList;
 import java.util.List;

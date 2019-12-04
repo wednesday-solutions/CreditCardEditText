@@ -1,4 +1,4 @@
-package com.wednesday.library;
+package com.wednesday.creditcardedittext;
 
 /**
  * Created by kauserali on 05/05/14.
