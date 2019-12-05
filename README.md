@@ -17,7 +17,7 @@ This library is an extension of Android's EditText control. Its purpose is to de
 
 ### Method 1: Referencing library project
 
-CreditCardEditText is created as a standalone Android-Library project. You can easily include this project by referencing the library/ folder in your project using either eclipse or Android studio
+CreditCardEditText is created as a standalone Android-Library project. You can easily include this project by referencing the library/ folder in your project using Android studio
 
 ### Method 2: Adding a remote referece
 
@@ -36,7 +36,7 @@ repositories {
 
 ```
 dependencies {
-    compile 'com.alihafizji.creditcardedittext:library:+@aar'
+    implementation 'com.github.wednesday-solutions:CreditCardEditText:+@aar'
 }
 ```
 **Note: The dependacy section can have other dependencies**
@@ -50,6 +50,8 @@ By default this control detects the following card types:
 * Visa
 * American Express
 * Mastercard
+* Diners
+* Rupay
 
 In case you want to support more types then simply create an object that implements the `CreditCardEditText.CreditCartEditTextInterface` interface and return a list of `CreditCardEditText.CreditCard` objects as shown below:
 
@@ -78,12 +80,6 @@ public class CreditCardPatterns implements CreditCardEditText.CreditCartEditText
 The `CreditCard` class has details about the regex pattern, image and a string identifier.
 
 Once this class is ready all you need to do is to pass this object to the `CreditCardEditText` control. This is done using the `setCreditCardEditTextListener` method.
-
-## Developed by
-
-* Ali Hafizji <ali.hafizji@gmail.com>
-
-[Follow me on twitter](https://twitter.com/Ali_hafizji).
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CreditCardEditText-orange.svg?style=flat)](https://android-arsenal.com/details/1/474)
 
